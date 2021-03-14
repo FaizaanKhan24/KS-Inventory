@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    x:Class="KSInventory.Themes.LightTheme"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:KSInventory.Converters">
+
+    <!--  Colors  -->
+    <Color x:Key="ContentTextColor">Black</Color>
+    <Color x:Key="FrameColor">Orange</Color>
+    <Color x:Key="PlaceholderColor">#B1BBB6</Color>
+    <Color x:Key="ButtonBackgroundColor">Black</Color>
+    <Color x:Key="ButtonTextColor">Orange</Color>
+    <Color x:Key="HeadingTextColor">Gray</Color>
+    <Color x:Key="DividerColor">LightGray</Color>
+    <Color x:Key="ProductDetailHeadingColor">Black</Color>
+    <Color x:Key="ProductDetailColor">Black</Color>
+    <Color x:Key="HomePageBackgroundColor">#231F20</Color>
+    <Color x:Key="HomeButtonBackgroundColor">#F8773E</Color>
+    <Color x:Key="HomeButtonTextColor">White</Color>
+
+    <!--  Styles  -->
+    <Style x:Key="HomeButtonStyle" TargetType="Button">
+        <Setter Property="TextColor" Value="{StaticResource HomeButtonTextColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource HomeButtonBackgroundColor}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Margin" Value="12,8" />
+    </Style>
+    <Style x:Key="FormFrameStyle" TargetType="Frame">
+        <Setter Property="Padding" Value="12,0" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="HasShadow" Value="False" />
+        <Setter Property="BorderColor" Value="{StaticResource FrameColor}" />
+    </Style>
+    <Style x:Key="ProductDetailsHeadingStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{StaticResource ProductDetailHeadingColor}" />
+    </Style>
+    <Style x:Key="ProductDetailsStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="TextColor" Value="{StaticResource ProductDetailColor}" />
+    </Style>
+
+    <!--  Data Templates  -->
+    <DataTemplate x:Key="ProductListDataTemplate">
+        <StackLayout BindableLayout.ItemsSource="{Binding Texts}" VerticalOptions="FillAndExpand">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Frame
+                        Margin="0,4"
+                        Padding="0"
+                        BackgroundColor="Black"
+                        BorderColor="Orange"
+                        CornerRadius="6">
+                        <Grid ColumnSpacing="12" HeightRequest="60">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="8" />
+                                <ColumnDefinition Width="92" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="80" />
+                            </Grid.ColumnDefinitions>
+
+                            <!--  T-Shirt Type  -->
+                            <Frame
+                                Grid.Column="1"
+                                Margin="12"
+                                Padding="0"
+                                BackgroundColor="Black"
+                                BorderColor="Orange">
+                                <Label
+                                    Grid.Column="1"
+                                    FontSize="18"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding Design}"
+                                    TextColor="Orange"
+                                    VerticalOptions="Center" />
+                            </Frame>
+
+                            <!--  Product Name  -->
+                            <Label
+                                Grid.Column="2"
+                                FontSize="16"
+                                HorizontalTextAlignment="Start"
+                                Text="{Binding ProductName}"
+                                TextColor="LightGray"
+                                VerticalOptions="Center" />
+
+                            <!--  Product Size  -->
+                            <Frame
+                                Grid.Column="3"
+                                Margin="12"
+                                Padding="0"
+                                BackgroundColor="Black"
+                                BorderColor="Orange"
+                                CornerRadius="6">
+                                <Label
+                                    Grid.Column="3"
+                                    FontSize="18"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding Size, Converter={StaticResource SizetoStringConverter}}"
+                                    TextColor="Orange"
+                                    VerticalOptions="Center" />
+                            </Frame>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
+    </DataTemplate>
+
+    <!--  Converters  -->
+    <converters:SizeConverter x:Key="SizetoStringConverter" />
+
+</ResourceDictionary>

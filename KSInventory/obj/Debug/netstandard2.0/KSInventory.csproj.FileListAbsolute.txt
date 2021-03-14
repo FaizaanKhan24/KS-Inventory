@@ -1,0 +1,15 @@
+/Users/faizaankhan/Projects/KSInventory/KSInventory/bin/Debug/netstandard2.0/KSInventory.deps.json
+/Users/faizaankhan/Projects/KSInventory/KSInventory/bin/Debug/netstandard2.0/KSInventory.dll
+/Users/faizaankhan/Projects/KSInventory/KSInventory/bin/Debug/netstandard2.0/ref/KSInventory.dll
+/Users/faizaankhan/Projects/KSInventory/KSInventory/bin/Debug/netstandard2.0/KSInventory.pdb
+/Users/faizaankhan/Projects/KSInventory/KSInventory/obj/Debug/netstandard2.0/KSInventory.csprojAssemblyReference.cache
+/Users/faizaankhan/Projects/KSInventory/KSInventory/obj/Debug/netstandard2.0/App.xaml.g.cs
+/Users/faizaankhan/Projects/KSInventory/KSInventory/obj/Debug/netstandard2.0/MainPage.xaml.g.cs
+/Users/faizaankhan/Projects/KSInventory/KSInventory/obj/Debug/netstandard2.0/Views/HomePage.xaml.g.cs
+/Users/faizaankhan/Projects/KSInventory/KSInventory/obj/Debug/netstandard2.0/KSInventory.AssemblyInfoInputs.cache
+/Users/faizaankhan/Projects/KSInventory/KSInventory/obj/Debug/netstandard2.0/KSInventory.AssemblyInfo.cs
+/Users/faizaankhan/Projects/KSInventory/KSInventory/obj/Debug/netstandard2.0/KSInventory.csproj.CoreCompileInputs.cache
+/Users/faizaankhan/Projects/KSInventory/KSInventory/obj/Debug/netstandard2.0/XamlC.stamp
+/Users/faizaankhan/Projects/KSInventory/KSInventory/obj/Debug/netstandard2.0/KSInventory.dll
+/Users/faizaankhan/Projects/KSInventory/KSInventory/obj/Debug/netstandard2.0/ref/KSInventory.dll
+/Users/faizaankhan/Projects/KSInventory/KSInventory/obj/Debug/netstandard2.0/KSInventory.pdb
