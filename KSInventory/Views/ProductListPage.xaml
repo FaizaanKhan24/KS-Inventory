@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="KSInventory.Views.ProductListPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customController="clr-namespace:KSInventory.CustomControllers"
+    xmlns:views="http://xamarin.com/schemas/2020/toolkit"
+    x:Name="productLists"
+    Title="Products"
+    BackgroundColor="White">
+    <ContentPage.Content>
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--  Search Bar  -->
+            <Frame
+                Grid.Row="0"
+                Padding="0"
+                BorderColor="Orange"
+                CornerRadius="12"
+                HasShadow="True">
+                <customController:BorderlessSearchbar
+                    x:Name="searchBar"
+                    CancelButtonColor="Orange"
+                    Placeholder="Search by Product Name"
+                    Text="{Binding SearchText}"
+                    TextChanged="searchBar_TextChanged" />
+            </Frame>
+
+            <!--  List View  -->
+            <ScrollView
+                Grid.Row="1"
+                HorizontalScrollBarVisibility="Never"
+                VerticalScrollBarVisibility="Never">
+                <StackLayout
+                    x:Name="productListView"
+                    Grid.Row="1"
+                    BindableLayout.ItemsSource="{Binding FilteredProducts}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <views:Expander x:Name="expander">
+                                <views:Expander.Header>
+                                    <Frame
+                                        Margin="0,8"
+                                        Padding="0"
+                                        BorderColor="Black"
+                                        CornerRadius="8"
+                                        HasShadow="True">
+                                        <Grid
+                                            Margin="0"
+                                            BackgroundColor="WhiteSmoke"
+                                            ColumnSpacing="12"
+                                            HeightRequest="64">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="8" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="60" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <!--  Color Template  -->
+                                            <BoxView Grid.Column="0" BackgroundColor="{Binding ProductCategoryColor}" />
+
+                                            <!--  Heading Name  -->
+                                            <Label
+                                                Grid.Column="1"
+                                                FontSize="20"
+                                                Text="{Binding ProductCategoryName}"
+                                                TextColor="Black"
+                                                VerticalOptions="Center" />
+
+                                            <!--  Drop down image  -->
+                                            <Image
+                                                Grid.Column="2"
+                                                HorizontalOptions="Center"
+                                                Source="expand.png"
+                                                VerticalOptions="Center">
+                                                <Image.Triggers>
+                                                    <DataTrigger
+                                                        Binding="{Binding Source={x:Reference expander}, Path=IsExpanded}"
+                                                        TargetType="Image"
+                                                        Value="True">
+                                                        <Setter Property="Source" Value="collapse.png" />
+                                                    </DataTrigger>
+                                                </Image.Triggers>
+                                            </Image>
+                                        </Grid>
+                                    </Frame>
+                                </views:Expander.Header>
+                                <views:Expander.ContentTemplate>
+                                    <DataTemplate>
+                                        <StackLayout BindableLayout.ItemsSource="{Binding CategoryProducts}" VerticalOptions="FillAndExpand">
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Frame
+                                                        Margin="0,4"
+                                                        Padding="0"
+                                                        BackgroundColor="Black"
+                                                        BorderColor="Orange"
+                                                        CornerRadius="6">
+                                                        <Grid ColumnSpacing="12" HeightRequest="60">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="8" />
+                                                                <ColumnDefinition Width="92" />
+                                                                <ColumnDefinition Width="*" />
+                                                                <ColumnDefinition Width="80" />
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <!--  T-Shirt Type  -->
+                                                            <Frame
+                                                                Grid.Column="1"
+                                                                Margin="12"
+                                                                Padding="0"
+                                                                BackgroundColor="Black"
+                                                                BorderColor="Orange"
+                                                                CornerRadius="6">
+                                                                <Label
+                                                                    Grid.Column="1"
+                                                                    FontSize="18"
+                                                                    HorizontalTextAlignment="Center"
+                                                                    Text="{Binding Design}"
+                                                                    TextColor="Orange"
+                                                                    VerticalOptions="Center" />
+                                                            </Frame>
+
+                                                            <!--  Product Name  -->
+                                                            <Label
+                                                                Grid.Column="2"
+                                                                FontSize="16"
+                                                                HorizontalTextAlignment="Start"
+                                                                Text="{Binding ProductName}"
+                                                                TextColor="LightGray"
+                                                                VerticalOptions="Center" />
+
+                                                            <!--  Product Size  -->
+                                                            <Frame
+                                                                Grid.Column="3"
+                                                                Margin="12"
+                                                                Padding="0"
+                                                                BackgroundColor="Black"
+                                                                BorderColor="Orange"
+                                                                CornerRadius="6">
+                                                                <Label
+                                                                    Grid.Column="3"
+                                                                    FontSize="18"
+                                                                    HorizontalTextAlignment="Center"
+                                                                    Text="{Binding Size, Converter={StaticResource SizetoStringConverter}}"
+                                                                    TextColor="Orange"
+                                                                    VerticalOptions="Center" />
+                                                            </Frame>
+                                                        </Grid>
+                                                        <Frame.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding Source={x:Reference productLists}, Path=BindingContext.ProductCommand}" CommandParameter="{Binding}" />
+                                                        </Frame.GestureRecognizers>
+                                                    </Frame>
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </views:Expander.ContentTemplate>
+                            </views:Expander>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+                <ScrollView.Triggers>
+                    <DataTrigger
+                        Binding="{Binding Source={x:Reference searchedItemList}, Path=IsVisible}"
+                        TargetType="ScrollView"
+                        Value="True">
+                        <Setter Property="IsVisible" Value="False" />
+                    </DataTrigger>
+                </ScrollView.Triggers>
+            </ScrollView>
+
+            <!--  Search List  -->
+            <ScrollView
+                x:Name="searchedItemList"
+                Grid.Row="1"
+                HorizontalScrollBarVisibility="Never"
+                VerticalScrollBarVisibility="Never">
+                <StackLayout BindableLayout.ItemsSource="{Binding SearchedProductDetails}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Frame
+                                Margin="0,4"
+                                Padding="0"
+                                BackgroundColor="Black"
+                                BorderColor="Orange"
+                                CornerRadius="6">
+                                <Grid ColumnSpacing="12" HeightRequest="60">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="8" />
+                                        <ColumnDefinition Width="92" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="80" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--  T-Shirt Type  -->
+                                    <Frame
+                                        Grid.Column="1"
+                                        Margin="12"
+                                        Padding="0"
+                                        BackgroundColor="Black"
+                                        BorderColor="Orange">
+                                        <Label
+                                            Grid.Column="1"
+                                            FontSize="18"
+                                            HorizontalTextAlignment="Center"
+                                            Text="{Binding Design}"
+                                            TextColor="Orange"
+                                            VerticalOptions="Center" />
+                                    </Frame>
+
+                                    <!--  Product Name  -->
+                                    <Label
+                                        Grid.Column="2"
+                                        FontSize="16"
+                                        HorizontalTextAlignment="Start"
+                                        Text="{Binding ProductName}"
+                                        TextColor="LightGray"
+                                        VerticalOptions="Center" />
+
+                                    <!--  Product Size  -->
+                                    <Frame
+                                        Grid.Column="3"
+                                        Margin="12"
+                                        Padding="0"
+                                        BackgroundColor="Black"
+                                        BorderColor="Orange"
+                                        CornerRadius="6">
+                                        <Label
+                                            Grid.Column="3"
+                                            FontSize="18"
+                                            HorizontalTextAlignment="Center"
+                                            Text="{Binding Size, Converter={StaticResource SizetoStringConverter}}"
+                                            TextColor="Orange"
+                                            VerticalOptions="Center" />
+                                    </Frame>
+                                </Grid>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference productLists}, Path=BindingContext.ProductCommand}" CommandParameter="{Binding}" />
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+                <ScrollView.Triggers>
+                    <DataTrigger
+                        Binding="{Binding SearchedProductDetails.Count}"
+                        TargetType="ScrollView"
+                        Value="0">
+                        <Setter Property="IsVisible" Value="False" />
+                    </DataTrigger>
+                </ScrollView.Triggers>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="KSInventory.Views.HomePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="AntiqueWhite">
+    <ContentPage.Content>
+        <Grid Padding="20" BackgroundColor="{StaticResource HomePageBackgroundColor}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <!--  Company Name  -->
+            <Image Grid.Row="0" Source="KnitLogo.jpg" />
+
+            <!--  Add new Product Button  -->
+            <Button
+                Grid.Row="1"
+                Command="{Binding NewProductCommand}"
+                Style="{StaticResource HomeButtonStyle}"
+                Text="Add new Product" />
+
+            <!--  View All Products Button  -->
+            <Button
+                Grid.Row="2"
+                Command="{Binding ViewProductsCommand}"
+                Style="{StaticResource HomeButtonStyle}"
+                Text="View All Products" />
+
+            <!--  Add New Sale  -->
+            <Button
+                Grid.Row="3"
+                Command="{Binding NewSaleCommand}"
+                Style="{StaticResource HomeButtonStyle}"
+                Text="Add new Sale" />
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

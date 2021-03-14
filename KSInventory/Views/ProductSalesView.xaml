@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="KSInventory.Views.ProductSalesView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="productSales">
+    <ContentView.Content>
+        <Grid>
+            <ListView
+                Margin="30"
+                HasUnevenRows="True"
+                HorizontalScrollBarVisibility="Never"
+                ItemsSource="{Binding Product.SaleDetails}"
+                SelectionMode="None"
+                VerticalScrollBarVisibility="Never">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame
+                                Margin="4,8"
+                                Padding="12"
+                                BorderColor="Orange"
+                                CornerRadius="16"
+                                HasShadow="True">
+                                <Grid RowSpacing="12">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40*" />
+                                        <ColumnDefinition Width="5*" />
+                                        <ColumnDefinition Width="45*" />
+                                        <ColumnDefinition Width="5*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--  Date  -->
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        FontAttributes="Bold"
+                                        FontSize="18"
+                                        Text="Date"
+                                        TextColor="{StaticResource ContentTextColor}" />
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        FontAttributes="Bold"
+                                        FontSize="18"
+                                        Text=":"
+                                        TextColor="{StaticResource ContentTextColor}" />
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="2"
+                                        FontSize="18"
+                                        Text="{Binding Date, StringFormat='{0 :MMMM dd, yyyy}'}"
+                                        TextColor="{StaticResource ContentTextColor}" />
+
+                                    <!--  Total Sold  -->
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        FontAttributes="Bold"
+                                        FontSize="18"
+                                        Text="Total Sold"
+                                        TextColor="{StaticResource ContentTextColor}" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        FontAttributes="Bold"
+                                        FontSize="18"
+                                        Text=":"
+                                        TextColor="{StaticResource ContentTextColor}" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="2"
+                                        FontSize="18"
+                                        Text="{Binding TotalSold}"
+                                        TextColor="{StaticResource ContentTextColor}" />
+
+                                    <!--  Edit & Delete Icon  -->
+                                    <ImageButton
+                                        Grid.Row="0"
+                                        Grid.Column="3"
+                                        Aspect="AspectFit"
+                                        BackgroundColor="Transparent"
+                                        Command="{Binding Source={x:Reference productSales}, Path=BindingContext.EditSalesCommand}"
+                                        CommandParameter="{Binding}"
+                                        HeightRequest="16"
+                                        Source="edit.png"
+                                        WidthRequest="16" />
+                                    <ImageButton
+                                        Grid.Row="1"
+                                        Grid.Column="3"
+                                        Aspect="AspectFit"
+                                        BackgroundColor="Transparent"
+                                        Command="{Binding Source={x:Reference productSales}, Path=BindingContext.DeleteSalesCommand}"
+                                        HeightRequest="16"
+                                        Source="delete.png"
+                                        WidthRequest="16" />
+
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentView.Content>
+</ContentView>
