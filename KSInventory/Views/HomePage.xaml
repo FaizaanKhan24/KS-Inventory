@@ -11,6 +11,7 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
             <!--  Company Name  -->
@@ -21,21 +22,28 @@
                 Grid.Row="1"
                 Command="{Binding NewProductCommand}"
                 Style="{StaticResource HomeButtonStyle}"
-                Text="Add new Product" />
+                Text="Add New Product" />
 
-            <!--  View All Products Button  -->
+            <!--  Add new Product Stock Button  -->
             <Button
                 Grid.Row="2"
-                Command="{Binding ViewProductsCommand}"
+                Command="{Binding NewStockCommand}"
                 Style="{StaticResource HomeButtonStyle}"
-                Text="View All Products" />
+                Text="Add New Stock" />
 
             <!--  Add New Sale  -->
             <Button
                 Grid.Row="3"
                 Command="{Binding NewSaleCommand}"
                 Style="{StaticResource HomeButtonStyle}"
-                Text="Add new Sale" />
+                Text="Add New Sale" />
+
+            <!--  View All Products Button  -->
+            <Button
+                Grid.Row="4"
+                Command="{Binding ViewProductsCommand}"
+                Style="{StaticResource HomeButtonStyle}"
+                Text="View All Products" />
 
         </Grid>
     </ContentPage.Content>

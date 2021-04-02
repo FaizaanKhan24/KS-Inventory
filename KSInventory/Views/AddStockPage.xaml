@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="KSInventory.Views.AddStockPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControl="clr-namespace:KSInventory.CustomControllers"
+    Title="Add Stock Details">
+    <ContentPage.Content>
+        <Grid
+            Padding="28"
+            ColumnSpacing="16"
+            RowSpacing="12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="50*" />
+            </Grid.ColumnDefinitions>
+
+            <!--  Filter Label  -->
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                FontAttributes="Bold"
+                FontSize="24"
+                Text="Filters"
+                TextColor="Orange" />
+
+            <!--  Color Selector  -->
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                FontAttributes="Bold"
+                FontSize="18"
+                Text="Color"
+                TextColor="{StaticResource ContentTextColor}" />
+            <Frame
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Style="{StaticResource FormFrameStyle}">
+                <customControl:BorderlessPicker
+                    x:Name="ColorPicker"
+                    Title="Select Color"
+                    ItemDisplayBinding="{Binding Colors}"
+                    ItemsSource="{Binding ColorsVarities}"
+                    SelectedIndex="0"
+                    SelectedIndexChanged="ColorPicker_SelectedIndexChanged"
+                    SelectedItem="{Binding SelectedColor}"
+                    TitleColor="{StaticResource PlaceholderColor}" />
+            </Frame>
+
+            <!--  Select Design  -->
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"
+                FontAttributes="Bold"
+                FontSize="18"
+                Text="Design"
+                TextColor="{StaticResource ContentTextColor}" />
+            <Frame
+                Grid.Row="4"
+                Grid.Column="0"
+                Margin="0,0,0,16"
+                Style="{StaticResource FormFrameStyle}">
+                <customControl:BorderlessPicker
+                    x:Name="DesignPicker"
+                    Title="Select Design"
+                    ItemDisplayBinding="{Binding Designs}"
+                    ItemsSource="{Binding DesignVarities}"
+                    SelectedIndex="0"
+                    SelectedIndexChanged="DesignPicker_SelectedIndexChanged"
+                    SelectedItem="{Binding SelectedDesign}"
+                    TitleColor="{StaticResource PlaceholderColor}" />
+            </Frame>
+
+            <!--  Select Size  -->
+            <Label
+                Grid.Row="3"
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="18"
+                Text="Color"
+                TextColor="{StaticResource ContentTextColor}" />
+            <Frame
+                Grid.Row="4"
+                Grid.Column="1"
+                Margin="0,0,0,16"
+                Style="{StaticResource FormFrameStyle}">
+                <customControl:BorderlessPicker
+                    x:Name="SizePicker"
+                    Title="Select Size"
+                    ItemDisplayBinding="{Binding Sizes}"
+                    ItemsSource="{Binding SizeVarities}"
+                    SelectedIndex="0"
+                    SelectedIndexChanged="SizePicker_SelectedIndexChanged"
+                    SelectedItem="{Binding SelectedSize}"
+                    TitleColor="{StaticResource PlaceholderColor}" />
+            </Frame>
+
+            <!--  Divider  -->
+            <BoxView
+                Grid.Row="5"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                BackgroundColor="{StaticResource DividerColor}" />
+
+            <!--  Select Product  -->
+            <Label
+                Grid.Row="6"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="0,16,0,0"
+                FontAttributes="Bold"
+                FontSize="18"
+                Text="Product"
+                TextColor="{StaticResource ContentTextColor}" />
+            <Frame
+                Grid.Row="7"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Style="{StaticResource FormFrameStyle}">
+                <customControl:BorderlessPicker
+                    x:Name="ProductPicker"
+                    Title="Select Product"
+                    ItemDisplayBinding="{Binding ProductName}"
+                    ItemsSource="{Binding ProductDetails}"
+                    SelectedIndex="0"
+                    SelectedIndexChanged="ProductPicker_SelectedIndexChanged"
+                    SelectedItem="{Binding SelectedProductDetails}"
+                    TitleColor="{StaticResource PlaceholderColor}" />
+            </Frame>
+
+            <!--  Select Stock Quantity  -->
+            <Label
+                Grid.Row="8"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="0,16,0,0"
+                FontAttributes="Bold"
+                FontSize="18"
+                Text="Stock Quantity"
+                TextColor="{StaticResource ContentTextColor}" />
+            <Frame
+                Grid.Row="9"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Style="{StaticResource FormFrameStyle}">
+                <customControl:BorderlessEntry
+                    FontSize="18"
+                    Keyboard="Numeric"
+                    Placeholder="Enter Stock Quantity"
+                    PlaceholderColor="{StaticResource PlaceholderColor}"
+                    Text="{Binding QuantityOrdered}"
+                    TextChanged="BorderlessEntry_TextChanged"
+                    TextColor="{StaticResource ContentTextColor}" />
+            </Frame>
+
+            <!--  Select Date  -->
+            <Label
+                Grid.Row="10"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="0,16,0,0"
+                FontAttributes="Bold"
+                FontSize="18"
+                Text="Date"
+                TextColor="{StaticResource ContentTextColor}" />
+            <Frame
+                Grid.Row="11"
+                Grid.Column="0"
+                Style="{StaticResource FormFrameStyle}">
+                <StackLayout>
+                    <Label
+                        Margin="8"
+                        FontSize="18"
+                        HorizontalTextAlignment="Center"
+                        Text="{Binding Source={x:Reference datePicker}, Path=Date, StringFormat='{0:MMMM dd, yyyy}'}"
+                        TextColor="{StaticResource ContentTextColor}" />
+                    <DatePicker
+                        x:Name="datePicker"
+                        Date="{Binding SelectedDate, Mode=TwoWay}"
+                        DateSelected="datePicker_DateSelected"
+                        Format="M"
+                        IsVisible="False"
+                        MaximumDate="{Binding MaximumDate, Mode=TwoWay}"
+                        MinimumDate="{Binding MinimumDate, Mode=TwoWay}" />
+                </StackLayout>
+            </Frame>
+            <Button
+                Grid.Row="11"
+                Grid.Column="1"
+                BackgroundColor="{StaticResource ButtonTextColor}"
+                Clicked="Button_Clicked"
+                CornerRadius="8"
+                HorizontalOptions="FillAndExpand"
+                Text="Select Date"
+                TextColor="{StaticResource ButtonBackgroundColor}" />
+
+            <!--  Save Button  -->
+            <Button
+                x:Name="SaveButton"
+                Grid.Row="12"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                BackgroundColor="{StaticResource ButtonBackgroundColor}"
+                Command="{Binding SaveCommand}"
+                CornerRadius="8"
+                IsEnabled="{Binding IsSubmitButtonEnabled, Mode=TwoWay}"
+                Text="Save"
+                TextColor="{StaticResource ButtonTextColor}"
+                VerticalOptions="End">
+                <Button.Triggers>
+                    <DataTrigger
+                        Binding="{Binding Source={x:Reference SaveButton}, Path=IsEnabled}"
+                        TargetType="Button"
+                        Value="False">
+                        <Setter Property="BackgroundColor" Value="LightGray" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

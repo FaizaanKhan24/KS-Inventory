@@ -15,16 +15,18 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.6.0" />
     <PackageReference Include="Xamarin.CommunityToolkit" Version="1.0.2" />
     <PackageReference Include="Microcharts.Forms" Version="0.9.5.9" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+    <PackageReference Include="SQLiteNetExtensions" Version="2.1.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
     <Folder Include="ViewModels\" />
-    <Folder Include="Models\" />
-    <Folder Include="Models\Enums\" />
     <Folder Include="Interface\" />
     <Folder Include="Themes\" />
     <Folder Include="CustomControllers\" />
     <Folder Include="Helper\" />
     <Folder Include="Converters\" />
+    <Folder Include="Database\" />
+    <Folder Include="Database\Models\" />
   </ItemGroup>
 </Project>

@@ -4,52 +4,53 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <ContentView.Content>
-        <ScrollView>
-            <Grid Margin="28,20">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50*" />
-                    <ColumnDefinition Width="50*" />
-                </Grid.ColumnDefinitions>
+        <Grid Margin="28,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="50*" />
+            </Grid.ColumnDefinitions>
 
-                <!--  Delete Product Button  -->
-                <ImageButton
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Padding="8"
-                    BackgroundColor="{StaticResource ButtonBackgroundColor}"
-                    BorderColor="Orange"
-                    BorderWidth="1"
-                    Command="{Binding DeleteProductCommand}"
-                    CornerRadius="20"
-                    Source="delete.png" />
+            <!--  Delete Product Button  -->
+            <ImageButton
+                Grid.Row="0"
+                Grid.Column="0"
+                Padding="8"
+                BackgroundColor="{StaticResource ButtonBackgroundColor}"
+                BorderColor="Orange"
+                BorderWidth="1"
+                Command="{Binding DeleteProductCommand}"
+                CornerRadius="20"
+                Source="delete.png" />
 
-                <!--  Edit Product Button  -->
-                <ImageButton
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Padding="8"
-                    BackgroundColor="{StaticResource ButtonBackgroundColor}"
-                    BorderColor="Orange"
-                    BorderWidth="1"
-                    Command="{Binding EditProductCommand}"
-                    CornerRadius="20"
-                    Source="edit.png" />
+            <!--  Edit Product Button  -->
+            <ImageButton
+                Grid.Row="0"
+                Grid.Column="1"
+                Padding="8"
+                BackgroundColor="{StaticResource ButtonBackgroundColor}"
+                BorderColor="Orange"
+                BorderWidth="1"
+                Command="{Binding EditProductCommand}"
+                CornerRadius="20"
+                Source="edit.png" />
 
-                <!--  Product Details  -->
-                <Frame
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Margin="0,4"
-                    Padding="4"
-                    BorderColor="Orange"
-                    CornerRadius="20"
-                    HasShadow="True">
-                    <Grid Padding="24,40,12,40" RowSpacing="20">
+            <!--  Product Details  -->
+            <Frame
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="0,4"
+                Padding="4"
+                BorderColor="Orange"
+                CornerRadius="20"
+                HasShadow="True">
+                <ScrollView VerticalScrollBarVisibility="Never">
+                    <Grid Padding="24,12,12,20" RowSpacing="20">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -276,7 +277,8 @@
                             Grid.Row="11"
                             Grid.Column="2"
                             Style="{StaticResource ProductDetailsStyle}"
-                            Text="{Binding Product.StockInHand}" />
+                            Text="{Binding Product.StockInHand}"
+                            TextColor="{Binding Product.StockInHand, Converter={StaticResource SafetyStockColorConverter}}" />
 
                         <!--  Total Sold  -->
                         <Label
@@ -313,9 +315,20 @@
                             Text="{Binding Product.AverageSold}" />
 
                     </Grid>
-                </Frame>
-            </Grid>
+                </ScrollView>
+            </Frame>
 
-        </ScrollView>
+            <Button
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                BackgroundColor="{StaticResource ButtonBackgroundColor}"
+                BorderColor="Orange"
+                BorderWidth="1"
+                Command="{Binding ProductStockDetailsCommand}"
+                CornerRadius="20"
+                Text="Stock Ordered Details"
+                TextColor="Orange" />
+        </Grid>
     </ContentView.Content>
 </ContentView>

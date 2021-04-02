@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
+using KSInventory.Database;
 using KSInventory.Helper;
-using KSInventory.Models;
+using KSInventory.Database.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -161,8 +162,33 @@ namespace KSInventory.ViewModels
 
         private async void SaveProduct()
         {
-            await Application.Current.MainPage.DisplayAlert("Success!", "New Item has been successfully added :)", "OK");
-            await Application.Current.MainPage.Navigation.PopAsync();
+            try
+            {
+                IsBusy = true;
+                ProductDetails productDetails = new ProductDetails()
+                {
+                    Material = SelectedMaterial.MaterialTypes,
+                    Product = SelectedProductType.ProductTypes,
+                    Color = SelectedColor.Colors,
+                    Design = SelectedDesign.Designs,
+                    Size = SelectedSize.Sizes,
+                    ProductName = ProductName,
+                    ProductSKU = ProductSKU
+                };
+                var isProductAdded = await ProductRepository.AddNewProduct(productDetails);
+                IsBusy = false;
+                if (isProductAdded)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Success!", "New Item has been successfully added :)", "OK");
+                    await Application.Current.MainPage.Navigation.PopAsync();
+                }
+                else
+                    await Application.Current.MainPage.DisplayAlert("Alert!", "Something went wrong.", "Ok");
+            }
+            catch (Exception ex)
+            {
+                IsBusy = false;
+            }
         }
 
         #endregion

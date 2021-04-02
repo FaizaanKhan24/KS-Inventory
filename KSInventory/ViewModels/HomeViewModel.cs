@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
+using KSInventory.Database;
+using KSInventory.Database.Models;
+using KSInventory.Models.Enums;
 using KSInventory.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -11,7 +15,7 @@ namespace KSInventory.ViewModels
     {
         #region Private Variables
 
-        
+        protected Repository Repository { get; }
 
         #endregion
 
@@ -19,6 +23,7 @@ namespace KSInventory.ViewModels
 
         public ICommand NewProductCommand { get; set; }
         public ICommand NewSaleCommand { get; set; }
+        public ICommand NewStockCommand { get; set; }
         public ICommand ViewProductsCommand { get; set; }
 
         #endregion
@@ -27,8 +32,7 @@ namespace KSInventory.ViewModels
 
         public HomeViewModel()
         {
-            InitializeCommands();
-            
+            InitializeCommands();            
         }
 
         #endregion
@@ -45,6 +49,7 @@ namespace KSInventory.ViewModels
         {
             NewProductCommand = new Command(NavigateToNewProductPage);
             NewSaleCommand = new Command(NavigateToNewSalePage);
+            NewStockCommand = new Command(NavigateToNewStockPage);
             ViewProductsCommand = new Command(NavigateToProductListPage);
         }
 
@@ -61,6 +66,11 @@ namespace KSInventory.ViewModels
         private async void NavigateToNewSalePage()
         {
             await Application.Current.MainPage.Navigation.PushAsync(new AddNewSalePage());
+        }
+
+        private async void NavigateToNewStockPage()
+        {
+            await Application.Current.MainPage.Navigation.PushAsync(new AddStockPage());
         }
 
         #endregion

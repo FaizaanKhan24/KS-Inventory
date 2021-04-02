@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
-using KSInventory.Models;
+using KSInventory.Database;
+using KSInventory.Database.Models;
 using Xamarin.Forms;
 
 namespace KSInventory.ViewModels
@@ -12,6 +13,7 @@ namespace KSInventory.ViewModels
         private string productName;
         private string productSKU;
         private bool isUpdateButtonEnabled;
+        private ProductDetails productDetails;
 
         #endregion
 
@@ -19,6 +21,7 @@ namespace KSInventory.ViewModels
 
         public EditProductViewModel(ProductDetails product)
         {
+            this.productDetails = product;
             ProductName = product.ProductName;
             ProductSKU = product.ProductSKU;
             InitializeCommands();
@@ -72,9 +75,26 @@ namespace KSInventory.ViewModels
         private async void UpdateProductDetails()
         {
             // TO DO: Integrate the Update Product Details API.
-
-            await Application.Current.MainPage.DisplayAlert("Success!", "Product details have been successfully updated.", "Ok");
-            await Application.Current.MainPage.Navigation.PopAsync();
+            try
+            {
+                IsBusy = true;
+                productDetails.ProductName = ProductName;
+                productDetails.ProductSKU = ProductSKU;
+                var isProductDetailsUpdated = await ProductRepository.UpdateProduct(productDetails);
+                IsBusy = false;
+                if (isProductDetailsUpdated)
+                {
+                    MessagingCenter.Send<object, ProductDetails>(this, "UpdateProductDetails", productDetails);
+                    await Application.Current.MainPage.DisplayAlert("Success!", "Product details have been successfully updated.", "Ok");
+                    await Application.Current.MainPage.Navigation.PopAsync();
+                }
+                else
+                    await Application.Current.MainPage.DisplayAlert("Alert!", "Something went wrong.", "Ok");
+            }
+            catch (Exception ex)
+            {
+                IsBusy = false;
+            }
         }
 
         public void ShouldEnableUpdateButton()

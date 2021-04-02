@@ -3,12 +3,13 @@
 namespace KSInventory.Database.Models.Enums
 {
     [Preserve(AllMembers = true)]
-    public enum Designs
+    public enum Sizes
     {
-        Solid,
-        NB,
-        LTA,
-        DA,
-        AR
+        None,
+        Small,
+        Medium,
+        Large,
+        XL,
+        XXL
     }
 }

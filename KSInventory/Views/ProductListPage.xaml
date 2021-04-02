@@ -41,7 +41,7 @@
                     BindableLayout.ItemsSource="{Binding FilteredProducts}">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <views:Expander x:Name="expander">
+                            <views:Expander x:Name="expander" IsVisible="{Binding IsVisible}">
                                 <views:Expander.Header>
                                     <Frame
                                         Margin="0,8"

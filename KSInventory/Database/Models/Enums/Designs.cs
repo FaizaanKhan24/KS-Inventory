@@ -3,11 +3,13 @@
 namespace KSInventory.Database.Models.Enums
 {
     [Preserve(AllMembers = true)]
-    public enum Colors
+    public enum Designs
     {
-        Red,
-        Black,
-        Blue,
-        White
+        None,
+        Solid,
+        NB,
+        LTA,
+        DA,
+        AR
     }
 }

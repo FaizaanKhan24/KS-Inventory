@@ -1,14 +1,14 @@
 ﻿using Xamarin.Forms.Internals;
 
-namespace KSInventory.Models.Enums
+namespace KSInventory.Database.Models.Enums
 {
     [Preserve(AllMembers = true)]
     public enum Colors
     {
+        None,
         Red,
         Black,
         Blue,
         White,
-        None
     }
 }
