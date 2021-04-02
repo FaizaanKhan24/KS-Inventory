@@ -1,16 +1,20 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using SQLite;
+using SQLiteNetExtensions.Attributes;
 
 namespace KSInventory.Database.Models
 {
     [Table("Product Sale Details")]
     public class ProductSalesDetails
     {
-        [Key]
-        public Guid Id { get; set; }
-        public virtual ProductDetails ProductId { get; set; }
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+        [ForeignKey(typeof(ProductDetails))]
+        public int ProductId { get; set; }
+
         public DateTime Date { get; set; }
+
         public int TotalSold { get; set; }
     }
 }

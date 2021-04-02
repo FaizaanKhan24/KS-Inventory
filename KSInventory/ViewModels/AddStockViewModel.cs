@@ -3,22 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using KSInventory.Helper;
-using KSInventory.Database.Models;
-using Xamarin.Forms;
-using Xamarin.Forms.Internals;
-using KSInventory.Database.Models.Enums;
 using KSInventory.Database;
+using KSInventory.Database.Models;
+using KSInventory.Database.Models.Enums;
+using KSInventory.Helper;
+using Xamarin.Forms;
 
 namespace KSInventory.ViewModels
 {
-    [Preserve(AllMembers = true)]
-    public class AddNewSaleViewModel : BaseViewModel
+    public class AddStockViewModel : BaseViewModel
     {
         #region Private Variables
 
         private bool isSubmitButtonEnabled;
-        private string quantitySold;
+        private string quantityOrdered;
         private DateTime minimumDate;
         private DateTime maximumDate;
         private DateTime selectedDate;
@@ -33,19 +31,19 @@ namespace KSInventory.ViewModels
 
         #endregion
 
-        #region Commands
-
-        public ICommand SaveCommand { get; set; }
-
-        #endregion
-
         #region Constructor
 
-        public AddNewSaleViewModel()
+        public AddStockViewModel()
         {
             InitializeCommands();
             InitializeProperties();
         }
+
+        #endregion
+
+        #region Command
+
+        public ICommand SaveCommand { get; set; }
 
         #endregion
 
@@ -61,10 +59,10 @@ namespace KSInventory.ViewModels
                 ((Command)SaveCommand).ChangeCanExecute();
             }
         }
-        public string QuantitySold
+        public string QuantityOrdered
         {
-            get {return quantitySold;}
-            set { quantitySold = value; OnPropertyChanged(); }
+            get { return quantityOrdered; }
+            set { quantityOrdered = value; OnPropertyChanged(); }
         }
         public DateTime MinimumDate
         {
@@ -131,7 +129,7 @@ namespace KSInventory.ViewModels
         {
             IsSubmitButtonEnabled = false;
             MaximumDate = DateTime.Now;
-            MinimumDate = new DateTime(2021,03,05);
+            MinimumDate = new DateTime(2021, 03, 05);
             ColorsVarities = EnumGenerator.GetVarietyList(Variety.Colors).Cast<ColorsVarity>().ToList();
             DesignVarities = EnumGenerator.GetVarietyList(Variety.Designs).Cast<DesignVarity>().ToList();
             SizeVarities = EnumGenerator.GetVarietyList(Variety.Sizes).Cast<SizeVarity>().ToList();
@@ -141,7 +139,7 @@ namespace KSInventory.ViewModels
 
         private void InitializeCommands()
         {
-            SaveCommand = new Command(SaveSale,CanEnableSaveButton());
+            SaveCommand = new Command(SaveSale, CanEnableSaveButton());
         }
 
         private Func<bool> CanEnableSaveButton()
@@ -151,7 +149,7 @@ namespace KSInventory.ViewModels
 
         private async Task FilterProductsByColor()
         {
-            if(SelectedColor != null)
+            if (SelectedColor != null)
             {
                 if (SelectedColor.Colors == Colors.None)
                     return;
@@ -189,8 +187,8 @@ namespace KSInventory.ViewModels
 
         public void ShouldEnableSaveButton()
         {
-            int soldQuantityCount = int.TryParse(QuantitySold, out int temp) ? temp : 0;
-            if(SelectedProductDetails != null && soldQuantityCount >0)
+            int soldQuantityCount = int.TryParse(QuantityOrdered, out int temp) ? temp : 0;
+            if (SelectedProductDetails != null && soldQuantityCount > 0)
             {
                 IsSubmitButtonEnabled = true;
                 return;
@@ -203,17 +201,17 @@ namespace KSInventory.ViewModels
             try
             {
                 IsBusy = true;
-                ProductSalesDetails productSales = new ProductSalesDetails()
+                ProductStockDetails productStockDetails = new ProductStockDetails()
                 {
                     Date = SelectedDate,
-                    TotalSold = int.Parse(QuantitySold),
+                    StocksOrdered = int.Parse(QuantityOrdered),
                     ProductId = SelectedProductDetails.Id
                 };
-                var isProductSaleAdded = await ProductSalesRepository.AddNewProductSale(productSales);
+                var isProductStockAdded = await ProductStocksRepository.AddNewProductStock(productStockDetails);
                 IsBusy = false;
-                if (isProductSaleAdded)
+                if (isProductStockAdded)
                 {
-                    await Application.Current.MainPage.DisplayAlert("Success!", "The sale has been updated.", "OK");
+                    await Application.Current.MainPage.DisplayAlert("Success!", "The stocks for the selected product have been updated.", "OK");
                     ClearAddStockForm();
                     //await Application.Current.MainPage.Navigation.PopAsync();
                 }
@@ -233,7 +231,7 @@ namespace KSInventory.ViewModels
             SelectedSize = new SizeVarity();
             SelectedProductDetails = new ProductDetails();
             SelectedDate = MinimumDate;
-            QuantitySold = string.Empty;
+            QuantityOrdered = string.Empty;
         }
 
         #endregion

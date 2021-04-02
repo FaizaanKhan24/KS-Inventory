@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
-using KSInventory.Models;
+using KSInventory.Database;
+using KSInventory.Database.Models;
 using KSInventory.Views;
 using Microcharts;
 using SkiaSharp;
@@ -27,6 +30,7 @@ namespace KSInventory.ViewModels
         #endregion
 
         private ProductDetails product;
+        private ObservableCollection<ProductSalesDetails> productSales;
         private List<ChartEntry> chartEntries;
 
         #endregion
@@ -38,6 +42,7 @@ namespace KSInventory.ViewModels
         public ICommand UpdateSalesCommand { get; set; }
         public ICommand EditProductCommand { get; set; }
         public ICommand DeleteProductCommand { get; set; }
+        public ICommand ProductStockDetailsCommand { get; set; }
 
         #endregion
 
@@ -46,13 +51,18 @@ namespace KSInventory.ViewModels
         public ProductViewModel(ProductDetails productDetails)
         {
             this.Product = productDetails;
-            var orderedSalesDetails = productDetails.SaleDetails.OrderByDescending(x => x.Date).ToList();
-            this.Product.SaleDetails = orderedSalesDetails;
+            var orderedSalesDetails = productDetails.SalesDetails.OrderByDescending(x => x.Date).ToList();
+            this.ProductSales = new ObservableCollection<ProductSalesDetails>(orderedSalesDetails);
             InitializeProperties();
             InitializeCommands();
             Device.BeginInvokeOnMainThread(() =>
             {
                 SetChartEntries();
+            });
+
+            MessagingCenter.Subscribe<object, ProductDetails>(this, "UpdateProductDetails", (sender, args) =>
+            {
+                Product = args;
             });
         }
 
@@ -105,6 +115,11 @@ namespace KSInventory.ViewModels
             get { return product; }
             set { product = value; OnPropertyChanged(); }
         }
+        public ObservableCollection<ProductSalesDetails> ProductSales
+        {
+            get { return productSales; }
+            set { productSales = value; OnPropertyChanged(); }
+        }
         public List<ChartEntry> ChartEntries
         {
             get { return chartEntries; }
@@ -118,22 +133,23 @@ namespace KSInventory.ViewModels
         private void InitializeProperties()
         {
             MaximumDate = DateTime.Now;
-            MinimumDate = new DateTime(2021, 01, 01);
+            MinimumDate = new DateTime(2021, 03, 05);
             ChartEntries = new List<ChartEntry>();
         }
 
         private void InitializeCommands()
         {
             EditSalesCommand = new Command<ProductSalesDetails>(NavigateToEditProductSalePage);
-            DeleteSalesCommand = new Command(DeleteSalesButtonTapped);
+            DeleteSalesCommand = new Command<ProductSalesDetails>(DeleteSalesButtonTapped);
             UpdateSalesCommand = new Command(UpdateProductSales, CanEnableUpdateButton());
             EditProductCommand = new Command(NavigateToEditProductPage);
             DeleteProductCommand = new Command(DeleteProductButtonTapped);
+            ProductStockDetailsCommand = new Command(NavigateToProductStockPage);
         }
 
         private void SetChartEntries()
         {
-            if (Product.SaleDetails != null && Product.SaleDetails.Count > 0)
+            if (Product.SalesDetails != null && Product.SalesDetails.Count > 0)
             {
                 Dictionary<string, int> monthlySales = GetMonthlySales();
 
@@ -149,9 +165,15 @@ namespace KSInventory.ViewModels
             }
         }
 
+        private void ResetChartEntries()
+        {
+            ChartEntries = new List<ChartEntry>();
+            SetChartEntries();
+        }
+
         private Dictionary<string, int> GetMonthlySales()
         {
-            var groupedSalesDetails = Product.SaleDetails.GroupBy(x => new { x.Date.Year, x.Date.Month }).ToList();
+            var groupedSalesDetails = Product.SalesDetails.GroupBy(x => new { x.Date.Year, x.Date.Month }).ToList();
             var orderedSalesDetails = groupedSalesDetails.OrderBy(x => x.Key.Year).ThenBy(x => x.Key.Month).ToList();
 
             Dictionary<string, int> monthlySales = new Dictionary<string, int>();
@@ -169,17 +191,38 @@ namespace KSInventory.ViewModels
 
         #region Delete Sale
 
-        private async void DeleteSalesButtonTapped()
+        private async void DeleteSalesButtonTapped(ProductSalesDetails productSalesDetails)
         {
-            bool canDeleteProductSale = await Application.Current.MainPage.DisplayAlert("Alert", "Do you want to delete the sales details for this page.", "Yes", "No");
+            bool canDeleteProductSale = await Application.Current.MainPage.DisplayAlert("Alert", "Do you want to delete the selected sales details?", "Yes", "No");
             if (canDeleteProductSale)
-                DeleteProductSale();
+                DeleteProductSale(productSalesDetails);
         }
 
-        private async void DeleteProductSale()
+        private async void DeleteProductSale(ProductSalesDetails productSalesDetails)
         {
             // TO DO Call Delete product Sale API.
-            await Application.Current.MainPage.DisplayAlert("Success!", "The selected Product sale is deleted successfully.", "Ok");
+            try
+            {
+                if(productSalesDetails != null)
+                {
+                    IsBusy = true;
+                    var isProductSalesDeleted = await ProductSalesRepository.DeleteProductSale(productSalesDetails);
+                    IsBusy = false;
+                    if (isProductSalesDeleted)
+                    {
+                        ProductSales.Remove(productSalesDetails);
+                        Product.SalesDetails = ProductSales.ToList();
+                        ResetChartEntries();
+                        await Application.Current.MainPage.DisplayAlert("Success!", "The selected Product sale is deleted successfully.", "Ok");
+                    }
+                    else
+                        await Application.Current.MainPage.DisplayAlert("Alert!", "Something went wrong.", "Ok");
+                }
+            }
+            catch (Exception ex)
+            {
+                IsBusy = false;
+            }
         }
 
         #endregion
@@ -215,8 +258,63 @@ namespace KSInventory.ViewModels
         private async void UpdateProductSales()
         {
             // TO DO Call Update Product Sales API.
-            await Application.Current.MainPage.DisplayAlert("Success!", "The selected Product sale is updated successfully.", "Ok");
-            await Application.Current.MainPage.Navigation.PopAsync();
+            try
+            {
+                IsBusy = true;
+                bool isProductSaleEdited = false;
+                SelectedProductSale.TotalSold = int.Parse(NewQuantitySold);
+                DateTime editedDateTime = SelectedProductSale.Date;
+                var dateProductSales = ProductSales.Where(x => x.Date == editedDateTime).ToList();
+
+                if (dateProductSales != null && dateProductSales.Count == 1)
+                {
+                    isProductSaleEdited = await UpdateSale(SelectedProductSale);
+                }
+                else if (dateProductSales != null && dateProductSales.Count > 1)
+                {
+                    var totalDaySale = dateProductSales.Sum(x => x.TotalSold);
+                    var productDaySale = dateProductSales[0];
+                    SelectedProductSale.TotalSold = totalDaySale;
+                    isProductSaleEdited = await UpdateSale(SelectedProductSale);
+                    if (isProductSaleEdited)
+                    {
+                        var extraSale = dateProductSales.Where(x => x.Id != SelectedProductSale.Id).ToList();
+                        foreach (var sale in extraSale)
+                        {
+                            bool isProductSaleDeleted = await ProductSalesRepository.DeleteProductSale(sale);
+                            if (isProductSaleDeleted)
+                                ProductSales.Remove(sale);
+                        }
+                    }
+                }
+                IsBusy = false;
+                if (isProductSaleEdited)
+                {
+                    var orderedProductSales = ProductSales.OrderByDescending(x => x.Date).ToList();
+                    Product.SalesDetails = orderedProductSales;
+                    ProductSales = new ObservableCollection<ProductSalesDetails>(orderedProductSales);
+                    ResetChartEntries();
+                    await Application.Current.MainPage.DisplayAlert("Success!", "The selected Product sale is updated successfully.", "Ok");
+                    await Application.Current.MainPage.Navigation.PopAsync();
+                }
+                else
+                    await Application.Current.MainPage.DisplayAlert("Alert!", "Something went wrong.", "Ok");
+            }
+            catch (Exception ex)
+            {
+                IsBusy = false;
+            }
+        }
+
+        private async Task<bool> UpdateSale(ProductSalesDetails productSalesDetails)
+        {
+            var isProductSaleEdited = await ProductSalesRepository.UpdateProductSale(productSalesDetails);
+            if (isProductSaleEdited)
+            {
+                int editedSaleIndex = ProductSales.IndexOf(ProductSales.Where(x => x.Id == productSalesDetails.Id).FirstOrDefault());
+                ProductSales[editedSaleIndex] = productSalesDetails;
+            }
+            return isProductSaleEdited;
         }
 
         #endregion
@@ -233,8 +331,24 @@ namespace KSInventory.ViewModels
         private async void DeleteProduct()
         {
             // TO DO Call Delete product API.
-            await Application.Current.MainPage.DisplayAlert("Success!", "The selected Product is deleted successfully.", "Ok");
-            await Application.Current.MainPage.Navigation.PopAsync();
+            try
+            {
+                IsBusy = true;
+                var isProductDeleted = await ProductRepository.DeleteProduct(Product);
+                IsBusy = false;
+                if (isProductDeleted)
+                {
+                    MessagingCenter.Send<object, ProductDetails>(this, "DeleteProduct", Product);
+                    await Application.Current.MainPage.DisplayAlert("Success!", "The selected Product is deleted successfully.", "Ok");
+                    await Application.Current.MainPage.Navigation.PopAsync();
+                }
+                else
+                    await Application.Current.MainPage.DisplayAlert("Alert!", "Something went wrong.", "Ok");
+            }
+            catch (Exception ex)
+            {
+                IsBusy = false;
+            }
         }
 
         #endregion
@@ -244,6 +358,15 @@ namespace KSInventory.ViewModels
         private async void NavigateToEditProductPage()
         {
             await Application.Current.MainPage.Navigation.PushAsync(new EditProductPage(Product));
+        }
+
+        #endregion
+
+        #region Product Stocks
+
+        private async void NavigateToProductStockPage()
+        {
+            await Application.Current.MainPage.Navigation.PushAsync(new ProductStockingPage(Product));
         }
 
         #endregion

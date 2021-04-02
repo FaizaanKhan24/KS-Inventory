@@ -113,5 +113,6 @@
 
     <!--  Converters  -->
     <converters:SizeConverter x:Key="SizetoStringConverter" />
+    <converters:SafetyStockColorConverter x:Key="SafetyStockColorConverter" />
 
 </ResourceDictionary>

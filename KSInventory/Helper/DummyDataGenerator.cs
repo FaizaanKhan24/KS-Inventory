@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using KSInventory.Models;
-using KSInventory.Models.Enums;
+using KSInventory.Database.Models;
+using KSInventory.Database.Models.Enums;
 
 namespace KSInventory.Helper
 {
@@ -18,7 +18,7 @@ namespace KSInventory.Helper
                 // Red
                 new ProductDetails()
                 {
-                    Id = Guid.NewGuid(),
+                    Id = 1,
                     Material = MaterialTypes.Cotton180GSMBiowash,
                     Product = ProductTypes.TShirt,
                     Color = Colors.Red,
@@ -26,97 +26,97 @@ namespace KSInventory.Helper
                     Size = Sizes.Large,
                     ProductName = "Red T-Shirt Solid Large",
                     ProductSKU = "CTSRESOLL180",
-                    TotalStockOrdered = 12,
-                    SaleDetails = new List<ProductSalesDetails>()
+                    TotalStockOrdered = 12,                    
+                    SalesDetails = new List<ProductSalesDetails>()
                     {
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddMonths(-1).AddDays(-8),
                             TotalSold = 4
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 2,
+                            ProductId = 1,
                             Date = DateTime.Today.AddMonths(-1),
                             TotalSold = 9
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 3,
+                            ProductId = 1,
                             Date = DateTime.Today.AddMonths(-12),
                             TotalSold = 9
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 4,
+                            ProductId = 1,
                             Date = DateTime.Today.AddMonths(-1).AddDays(-15),
                             TotalSold = 14
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 5,
+                            ProductId = 1,
                             Date = DateTime.Today.AddMonths(-4).AddDays(-8),
                             TotalSold = 15
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 6,
+                            ProductId = 1,
                             Date = DateTime.Today.AddMonths(-3).AddDays(-12),
                             TotalSold = 20
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 7,
+                            ProductId = 1,
                             Date = DateTime.Today.AddMonths(-7),
                             TotalSold = 18
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 8,
+                            ProductId = 1,
                             Date = DateTime.Today.AddMonths(-5).AddDays(-5),
                             TotalSold = 14
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 9,
+                            ProductId = 1,
                             Date = DateTime.Today.AddMonths(-8).AddDays(-6),
                             TotalSold = 7
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 10,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-7),
                             TotalSold = 6
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 11,
+                            ProductId = 1,
                             Date = DateTime.Now,
                             TotalSold = 1
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 12,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-3),
                             TotalSold = 3
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 13,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-1),
                             TotalSold = 9
                         }
@@ -124,7 +124,7 @@ namespace KSInventory.Helper
                 },
                 new ProductDetails()
                 {
-                    Id = Guid.NewGuid(),
+                    Id = 2,
                     Material = MaterialTypes.Cotton180GSMBiowash,
                     Product = ProductTypes.TShirt,
                     Color = Colors.Red,
@@ -133,40 +133,40 @@ namespace KSInventory.Helper
                     ProductName = "Red T-Shirt LTA Medium",
                     ProductSKU = "CTSRELTAM180",
                     TotalStockOrdered = 10,
-                    SaleDetails = new List<ProductSalesDetails>()
+                    SalesDetails = new List<ProductSalesDetails>()
                     {
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 14,
+                            ProductId = 1,
                             Date = DateTime.Today.AddMonths(-1),
                             TotalSold = 4
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 15,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-7),
                             TotalSold = 6
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 16,
+                            ProductId = 1,
                             Date = DateTime.Now,
                             TotalSold = 1
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 17,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-3),
                             TotalSold = 3
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 18,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-1),
                             TotalSold = 9
                         }
@@ -174,7 +174,7 @@ namespace KSInventory.Helper
                 },
                 new ProductDetails()
                 {
-                    Id = Guid.NewGuid(),
+                    Id = 3,
                     Material = MaterialTypes.Cotton180GSMBiowash,
                     Product = ProductTypes.TShirt,
                     Color = Colors.Red,
@@ -183,40 +183,40 @@ namespace KSInventory.Helper
                     ProductName = "Red T-Shirt NB XL",
                     ProductSKU = "CTSRENBXL180",
                     TotalStockOrdered = 6,
-                    SaleDetails = new List<ProductSalesDetails>()
+                    SalesDetails = new List<ProductSalesDetails>()
                     {
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddMonths(-1),
                             TotalSold = 4
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-7),
                             TotalSold = 6
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Now,
                             TotalSold = 1
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-3),
                             TotalSold = 3
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-1),
                             TotalSold = 9
                         }
@@ -226,7 +226,7 @@ namespace KSInventory.Helper
                 // Blue
                 new ProductDetails()
                 {
-                    Id = Guid.NewGuid(),
+                    Id = 4,
                     Material = MaterialTypes.Cotton180GSMBiowash,
                     Product = ProductTypes.TShirt,
                     Color = Colors.Blue,
@@ -235,40 +235,40 @@ namespace KSInventory.Helper
                     ProductName = "Blue T-Shirt Solid Small",
                     ProductSKU = "CTSBUSOLS180",
                     TotalStockOrdered = 12,
-                    SaleDetails = new List<ProductSalesDetails>()
+                    SalesDetails = new List<ProductSalesDetails>()
                     {
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddMonths(-1),
                             TotalSold = 4
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-7),
                             TotalSold = 6
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Now,
                             TotalSold = 1
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-3),
                             TotalSold = 3
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-1),
                             TotalSold = 9
                         }
@@ -276,7 +276,7 @@ namespace KSInventory.Helper
                 },
                 new ProductDetails()
                 {
-                    Id = Guid.NewGuid(),
+                    Id = 5,
                     Material = MaterialTypes.Cotton180GSMBiowash,
                     Product = ProductTypes.TShirt,
                     Color = Colors.Blue,
@@ -285,40 +285,40 @@ namespace KSInventory.Helper
                     ProductName = "Blue T-Shirt NB XXL",
                     ProductSKU = "CTSBUNBXXL180",
                     TotalStockOrdered = 10,
-                    SaleDetails = new List<ProductSalesDetails>()
+                    SalesDetails = new List<ProductSalesDetails>()
                     {
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddMonths(-1),
                             TotalSold = 4
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-7),
                             TotalSold = 6
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Now,
                             TotalSold = 1
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-3),
                             TotalSold = 3
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-1),
                             TotalSold = 9
                         }
@@ -326,7 +326,7 @@ namespace KSInventory.Helper
                 },
                 new ProductDetails()
                 {
-                    Id = Guid.NewGuid(),
+                    Id = 6,
                     Material = MaterialTypes.Cotton180GSMBiowash,
                     Product = ProductTypes.TShirt,
                     Color = Colors.Blue,
@@ -335,40 +335,40 @@ namespace KSInventory.Helper
                     ProductName = "Blue T-Shirt DA XL",
                     ProductSKU = "CTSBUDAXL180",
                     TotalStockOrdered = 6,
-                    SaleDetails = new List<ProductSalesDetails>()
+                    SalesDetails = new List<ProductSalesDetails>()
                     {
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddMonths(-1),
                             TotalSold = 4
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-7),
                             TotalSold = 6
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Now,
                             TotalSold = 1
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-3),
                             TotalSold = 3
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-1),
                             TotalSold = 9
                         }
@@ -378,7 +378,7 @@ namespace KSInventory.Helper
                 // Black
                 new ProductDetails()
                 {
-                    Id = Guid.NewGuid(),
+                    Id = 7,
                     Material = MaterialTypes.Cotton180GSMBiowash,
                     Product = ProductTypes.TShirt,
                     Color = Colors.Black,
@@ -387,40 +387,40 @@ namespace KSInventory.Helper
                     ProductName = "Black T-Shirt Solid Medium",
                     ProductSKU = "CTSBLSOLM180",
                     TotalStockOrdered = 12,
-                    SaleDetails = new List<ProductSalesDetails>()
+                    SalesDetails = new List<ProductSalesDetails>()
                     {
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddMonths(-1),
                             TotalSold = 4
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-7),
                             TotalSold = 6
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Now,
                             TotalSold = 1
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-3),
                             TotalSold = 3
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-1),
                             TotalSold = 9
                         }
@@ -428,7 +428,7 @@ namespace KSInventory.Helper
                 },
                 new ProductDetails()
                 {
-                    Id = Guid.NewGuid(),
+                    Id = 8,
                     Material = MaterialTypes.Cotton180GSMBiowash,
                     Product = ProductTypes.TShirt,
                     Color = Colors.Black,
@@ -437,40 +437,40 @@ namespace KSInventory.Helper
                     ProductName = "Black T-Shirt NB XL",
                     ProductSKU = "CTSBLNBXL180",
                     TotalStockOrdered = 10,
-                    SaleDetails = new List<ProductSalesDetails>()
+                    SalesDetails = new List<ProductSalesDetails>()
                     {
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddMonths(-1),
                             TotalSold = 4
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-7),
                             TotalSold = 6
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Now,
                             TotalSold = 1
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-3),
                             TotalSold = 3
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-1),
                             TotalSold = 9
                         }
@@ -478,7 +478,7 @@ namespace KSInventory.Helper
                 },
                 new ProductDetails()
                 {
-                    Id = Guid.NewGuid(),
+                    Id = 9,
                     Material = MaterialTypes.Cotton180GSMBiowash,
                     Product = ProductTypes.TShirt,
                     Color = Colors.Black,
@@ -487,40 +487,40 @@ namespace KSInventory.Helper
                     ProductName = "Black T-Shirt AR Large",
                     ProductSKU = "CTSBLARL180",
                     TotalStockOrdered = 6,
-                    SaleDetails = new List<ProductSalesDetails>()
+                    SalesDetails = new List<ProductSalesDetails>()
                     {
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddMonths(-1),
                             TotalSold = 4
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-7),
                             TotalSold = 6
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Now,
                             TotalSold = 1
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-3),
                             TotalSold = 3
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-1),
                             TotalSold = 9
                         }
@@ -530,7 +530,7 @@ namespace KSInventory.Helper
                 // Half White
                 new ProductDetails()
                 {
-                    Id = Guid.NewGuid(),
+                    Id = 10,
                     Material = MaterialTypes.Cotton180GSMBiowash,
                     Product = ProductTypes.TShirt,
                     Color = Colors.White,
@@ -539,40 +539,40 @@ namespace KSInventory.Helper
                     ProductName = "Half-White T-Shirt Solid Large",
                     ProductSKU = "CTSHWSOLL180",
                     TotalStockOrdered = 12,
-                    SaleDetails = new List<ProductSalesDetails>()
+                    SalesDetails = new List<ProductSalesDetails>()
                     {
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddMonths(-1),
                             TotalSold = 4
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-7),
                             TotalSold = 6
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Now,
                             TotalSold = 1
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-3),
                             TotalSold = 3
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-1),
                             TotalSold = 9
                         }
@@ -580,7 +580,7 @@ namespace KSInventory.Helper
                 },
                 new ProductDetails()
                 {
-                    Id = Guid.NewGuid(),
+                    Id = 11,
                     Material = MaterialTypes.Cotton180GSMBiowash,
                     Product = ProductTypes.TShirt,
                     Color = Colors.White,
@@ -589,40 +589,40 @@ namespace KSInventory.Helper
                     ProductName = "Half-White T-Shirt LTA XL",
                     ProductSKU = "CTSHWLTAXL180",
                     TotalStockOrdered = 10,
-                    SaleDetails = new List<ProductSalesDetails>()
+                    SalesDetails = new List<ProductSalesDetails>()
                     {
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddMonths(-1),
                             TotalSold = 4
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-7),
                             TotalSold = 6
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Now,
                             TotalSold = 1
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-3),
                             TotalSold = 3
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-1),
                             TotalSold = 9
                         }
@@ -630,7 +630,7 @@ namespace KSInventory.Helper
                 },
                 new ProductDetails()
                 {
-                    Id = Guid.NewGuid(),
+                    Id = 12,
                     Material = MaterialTypes.Cotton180GSMBiowash,
                     Product = ProductTypes.TShirt,
                     Color = Colors.White,
@@ -639,40 +639,40 @@ namespace KSInventory.Helper
                     ProductName = "Half-White T-Shirt AR Small",
                     ProductSKU = "CTSHWARS180",
                     TotalStockOrdered = 6,
-                    SaleDetails = new List<ProductSalesDetails>()
+                    SalesDetails = new List<ProductSalesDetails>()
                     {
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddMonths(-1),
                             TotalSold = 4
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-7),
                             TotalSold = 6
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Now,
                             TotalSold = 1
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-3),
                             TotalSold = 3
                         },
                         new ProductSalesDetails()
                         {
-                            Id = Guid.NewGuid(),
-                            ProductId = Guid.NewGuid(),
+                            Id = 1,
+                            ProductId = 1,
                             Date = DateTime.Today.AddDays(-1),
                             TotalSold = 9
                         }

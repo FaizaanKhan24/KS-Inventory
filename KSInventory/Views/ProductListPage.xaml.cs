@@ -80,12 +80,12 @@ namespace KSInventory.Views
 
             };
 
-            BindingContext = new ProductListViewMode();
+            BindingContext = new ProductListViewModel();
         }
 
         private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(this.BindingContext is ProductListViewMode productListViewModel)
+            if(this.BindingContext is ProductListViewModel productListViewModel)
             {
                 productListViewModel.SearchProduct();
             }

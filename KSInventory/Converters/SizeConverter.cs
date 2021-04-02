@@ -9,40 +9,9 @@ namespace KSInventory.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value is Sizes)
+            if(value.ToString() is string)
             {
-                Sizes productSize = (Sizes)value;
-                switch (productSize)
-                {
-                    case Sizes.Small:
-                        {
-                            return "S";
-                        }
-                    case Sizes.Medium:
-                        {
-                            return "M";
-                        }
-                    case Sizes.Large:
-                        {
-                            return "L";
-                        }
-                    case Sizes.XL:
-                        {
-                            return "XL";
-                        }
-                    case Sizes.XXL:
-                        {
-                            return "XXL";
-                        }
-                    default:
-                        {
-                            return null;
-                        }
-                }
-            }
-            if(value is string)
-            {
-                string productSize = (string)value;
+                string productSize = value.ToString();
                 switch (productSize)
                 {
                     case "Small":

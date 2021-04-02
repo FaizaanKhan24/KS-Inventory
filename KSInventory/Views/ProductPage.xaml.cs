@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using KSInventory.Models;
+﻿using KSInventory.Database.Models;
 using KSInventory.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -26,6 +24,7 @@ namespace KSInventory.Views
         {
             base.OnDisappearing();
             MessagingCenter.Unsubscribe<object>(this, "InitializeGraph");
+            MessagingCenter.Unsubscribe<object, ProductDetails>(this, "UpdateProductDetails");
         }
     }
 }
